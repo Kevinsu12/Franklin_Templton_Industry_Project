@@ -1,0 +1,49 @@
+{
+  "Undergraduate Headcount": {
+    "2024": 3833,
+    "2023": 3379
+  },
+  "Graduate Headcount": {
+    "2024": 2215,
+    "2023": 1731
+  },
+  "Professional Headcount": {
+    "2024": 620,
+    "2023": 633
+  },
+  "Total Headcount": {
+    "2024": 8277,
+    "2023": 7343
+  },
+  "Undergraduate FTE": {
+    "2024": 3121,
+    "2023": 3088
+  },
+  "Graduate FTE": {
+    "2024": 1419,
+    "2023": 1167
+  },
+  "Professional FTE": {
+    "2024": 544,
+    "2023": 428
+  },
+  "Total Full-Time Equivalent Students": {
+    "2024": 4984,
+    "2023": 4683
+  },
+  "Applications Rcvd": {
+    "2023": 5994
+  },
+  "Acceptances": {
+    "2023": 5659
+  },
+  "Matriculants": {
+    "2023": 734
+  },
+  "Tuition": {
+    "2023": 48300
+  },
+  "Room & Board (20 meals)": {
+    "2023": 15750
+  }
+}
