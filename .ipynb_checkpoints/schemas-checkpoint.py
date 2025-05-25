@@ -24,7 +24,8 @@ class Enrollment2024_25(BaseModel):
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc. "
             "Ignore any data from other years or terms. "
             "Combine across all campuses if the institution has multiple locations."
-            " Do not derive or hallucinate the data unless the field is actually in the document."
+            "Don't assume it's undergraduate full time unless it says undergraduate in the data description."
+            "When there is no specification of what kind of full-time it is, it should be total full-time."
         )
     )
     Undergraduate_Headcount_Part_Time: Optional[int] = Field(
@@ -34,6 +35,8 @@ class Enrollment2024_25(BaseModel):
             "Ignore any data from other years or terms. "
             "Combine across all campuses if the institution has multiple locations."
             " Do not derive or hallucinate the data unless the field is actually in the document."
+            "Don't assume it's undergraduate part time unless it says undergraduate in the data description."
+            "When there is no specification of what kind of part-time it is, it should be total part-time."
         )
     )
     Graduate_Headcount: Optional[int] = Field(
@@ -57,6 +60,8 @@ class Enrollment2024_25(BaseModel):
             "Ignore any data from other years or terms. "
             "Combine across campuses if needed."
             " Do not derive or hallucinate the data unless the field is actually in the document."
+            "Don't assume it's graduate full-time unless it says undergraduate in the data description."
+            "When there is no specification of what kind of full-time it is, it should be total full-time."
         )
     )
     Graduate_Headcount_Part_Time: Optional[int] = Field(
@@ -67,6 +72,8 @@ class Enrollment2024_25(BaseModel):
             "Ignore any data from other years or terms. "
             "Combine across campuses if needed."
             " Do not derive or hallucinate the data unless the field is actually in the document."
+            "Don't assume it's graduate part time unless it says undergraduate in the data description."
+            "When there is no specification of what kind of part-time it is, it should be total part-time."
         )
     )
     Professional_Headcount: Optional[int] = Field(
@@ -110,6 +117,7 @@ class Enrollment2024_25(BaseModel):
             "Ignore any data from other years or terms."
             "do **not** derive it by summing individual full‑time headcounts."
             " Do not derive or hallucinate the data unless the field is actually in the document."
+            "When there is no specification of what kind of full-time it is, it should be total full-time."
 
         )
     )
@@ -121,6 +129,8 @@ class Enrollment2024_25(BaseModel):
             "Ignore any data from other years or terms."
             "do **not** derive it by summing individual part‑time headcounts."
             " Do not derive or hallucinate the data unless the field is actually in the document."
+            "When there is no specification of what kind of full-time it is, it should be total full-time."
+
 
         )
     )
