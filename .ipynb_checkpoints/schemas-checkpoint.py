@@ -7,11 +7,8 @@ class Enrollment2024_25(BaseModel):
             "Total undergraduate headcount for the 2024–2025 academic year "
             "(Different than undergraduate FTE. Sometimes you need to combine both full-time and part time)."
             "Search around the tables to locate what type of enrollment information it is."
-            "Ex: Texas A&M's first table is just says 'total enrollment headcount', but if you look around the table, it's for "
-            "combination of undergraduate and graduate, so it doesn't belong to this undergraduate_headcount, it should be total headcount."
-            "DO NOT include the first table information on Texas A&M for this field, it should be for total headcount."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count or online and in-person count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -22,7 +19,7 @@ class Enrollment2024_25(BaseModel):
             "Undergraduate full-time or FT headcount for the 2024–2025 academic year. "
             "This is different than FTE(full-time equivalent)."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc. "
-            "Ignore any data from other years or terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine across all campuses if the institution has multiple locations."
             "Don't assume it's undergraduate full time unless it says undergraduate in the data description."
             "When there is no specification of what kind of full-time it is, it should be total full-time."
@@ -32,7 +29,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Undergraduate part-time (PT) headcount for the 2024–2025 academic year. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc. "
-            "Ignore any data from other years or terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine across all campuses if the institution has multiple locations."
             " Do not derive or hallucinate the data unless the field is actually in the document."
             "Don't assume it's undergraduate part time unless it says undergraduate in the data description."
@@ -41,12 +38,13 @@ class Enrollment2024_25(BaseModel):
     )
     Graduate_Headcount: Optional[int] = Field(
         description=(
-            "Total graduate headcount for the 2024–2025 academic year "
+            "Total graduate headcount for the 2024–2025 academic year. "
+            "Post baccalaureate is considered a graduate headcount."
             "(Different than graduate FTE. Sometimes you need to combine both full-time and part time), "
             "Combine enrollment across all graduate schools (e.g. Business, Education, etc.), "
             "which may be labeled “GR”, “Grad”, or “Graduate”. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count or online and in-person count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -54,10 +52,11 @@ class Enrollment2024_25(BaseModel):
     Graduate_Headcount_Full_Time: Optional[int] = Field(
         description=(
             "Graduate full-time (FT) headcount for the 2024–2025 academic year. "
+            "Post baccalaureate is considered a graduate headcount."
             "This is different than FTE(full-time equivalent)."
             "Combine across all graduate schools. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc. "
-            "Ignore any data from other years or terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine across campuses if needed."
             " Do not derive or hallucinate the data unless the field is actually in the document."
             "Don't assume it's graduate full-time unless it says undergraduate in the data description."
@@ -67,9 +66,10 @@ class Enrollment2024_25(BaseModel):
     Graduate_Headcount_Part_Time: Optional[int] = Field(
         description=(
             "Graduate part-time (PT) headcount for the 2024–2025 academic year. "
+            "Post baccalaureate is considered a graduate headcount."
             "Combine across all graduate schools. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc. "
-            "Ignore any data from other years or terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine across campuses if needed."
             " Do not derive or hallucinate the data unless the field is actually in the document."
             "Don't assume it's graduate part time unless it says undergraduate in the data description."
@@ -78,10 +78,10 @@ class Enrollment2024_25(BaseModel):
     )
     Professional_Headcount: Optional[int] = Field(
         description=(
-            "Combined professional school headcount (e.g. med, law) for 2024–2025 "
+            "Combined professional school headcount (e.g. med, law) for 2024–2025. "
             "(Different than professional FTE. Sometimes you need to combine both full-time and part time)."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -92,7 +92,7 @@ class Enrollment2024_25(BaseModel):
             "(Different than Non-Degree FTE. Sometimes you need to combine both full-time and part time)."
             "Sometimes, Non-Degree is listed as Non-credit"
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -102,7 +102,7 @@ class Enrollment2024_25(BaseModel):
             "Overall student headcount for 2024–2025 "
             "do **not** compute it by adding Undergraduate, Graduate, Professional, etc."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -114,7 +114,7 @@ class Enrollment2024_25(BaseModel):
             "This is different than FTE(full-time equivalent)."
             "If not explicitly provided, sum Undergraduate_Headcount_Full_Time + Graduate_Headcount_Full_Time. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024. "
-            "Ignore any data from other years or terms."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "do **not** derive it by summing individual full‑time headcounts."
             " Do not derive or hallucinate the data unless the field is actually in the document."
             "When there is no specification of what kind of full-time it is, it should be total full-time."
@@ -126,7 +126,7 @@ class Enrollment2024_25(BaseModel):
             "Total part-time headcount for 2024–2025 across all student categories. "
             "If not explicitly provided, sum Undergraduate_Headcount_Part_Time + Graduate_Headcount_Part_Time. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024. "
-            "Ignore any data from other years or terms."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "do **not** derive it by summing individual part‑time headcounts."
             " Do not derive or hallucinate the data unless the field is actually in the document."
             "When there is no specification of what kind of full-time it is, it should be total full-time."
@@ -137,32 +137,33 @@ class Enrollment2024_25(BaseModel):
 
     Undergraduate_FTE: Optional[int] = Field(
         description=(
-            "Undergraduate full-time equivalent headcount or FTE for 2024–2025 "
+            "Undergraduate full-time equivalent headcount or FTE for 2024–2025. "
             "FTE (full-time equivalent) is different than full-time, or FT."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
     )
     Graduate_FTE: Optional[int] = Field(
         description=(
-            "Graduate full-time headcount or FTE for 2024–2025 "
+            "Graduate full-time headcount or FTE for 2024–2025. "
+            "Post baccalaureate is considered a graduate headcount."
             "FTE (full-time equivalent) is different than full-time, or FT."
             "Combine enrollment across all graduate schools (e.g. Business, Education, etc.), "
             "which may be labeled “GR”, “Grad”, or “Graduate”. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
     )
     Professional_FTE: Optional[int] = Field(
         description=(
-            "Professional school full-time headcount or FTE for 2024–2025 "
+            "Professional school full-time headcount or FTE for 2024–2025. "
             "FTE (full-time equivalent) is different than full-time, or FT."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -171,7 +172,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total full-time equivalent students (FTE) for the 2024–2025 academic year."
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023). "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             "do **not** derive it by summing the individual FTE fields."
             " Do not derive or hallucinate the data unless the field is actually in the document."
@@ -182,6 +183,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total undergraduate applications received for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -190,6 +192,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total graduate applications received for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -198,6 +201,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total transfer applications received for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -207,6 +211,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total undergraduate acceptances for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -215,6 +220,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total graduate acceptances for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -223,6 +229,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Total transfer acceptances for the 2024–2025 cycle "
             "(e.g. Fall 2024). Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -231,7 +238,7 @@ class Enrollment2024_25(BaseModel):
     Undergraduate_Matriculants: Optional[int] = Field(
         description=(
             "Number of undergraduate students who matriculated in Fall 2024 / 2024–2025. "
-            "Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -239,7 +246,7 @@ class Enrollment2024_25(BaseModel):
     Graduate_Matriculants: Optional[int] = Field(
         description=(
             "Number of graduate students who matriculated in Fall 2024 / 2024–2025. "
-            "Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -247,7 +254,7 @@ class Enrollment2024_25(BaseModel):
     Transfer_Matriculants: Optional[int] = Field(
         description=(
             "Number of transfer students who matriculated in Fall 2024 / 2024–2025. "
-            "Ignore other years/terms. "
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "Combine all campuses if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -256,7 +263,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Retention rate % for the 2024–2025 entering class. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc.; "
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023)."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -266,7 +273,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Full-time employee equivalents (staff/faculty) in 2024–2025. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc.; "
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023)."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -276,7 +283,7 @@ class Enrollment2024_25(BaseModel):
             "Undergraduate tuition rate for the 2024–2025 academic year. "
             "This is different than revenue generated by tuition or any financial accounting data"
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc.; "
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023)."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so average the tuition per student per campus."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
@@ -285,7 +292,7 @@ class Enrollment2024_25(BaseModel):
         description=(
             "Room & board cost (20-meal plan) for the 2024–2025 year. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc.; "
-            "ignore any data from other years or terms (e.g., 2023–2024, Fall 2023)."
+            "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count if applicable."
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
