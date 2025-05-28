@@ -10,6 +10,8 @@ class Enrollment2024_25(BaseModel):
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
             "ignore any data from other years or terms (e.g. 2023, 2023–2024, Fall 2023, Fall 2022, 2022). "
             "it's possible for a school to have multiple campuses, so combine all campuses' count or online and in-person count if applicable."
+            "If it didn't specify what kind of headcount is it, do not assume it's undergraduate headcount!!!"
+            "look around the table to see what type of data is it"
             " Do not derive or hallucinate the data unless the field is actually in the document."
         )
     )
