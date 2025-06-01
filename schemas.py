@@ -2,6 +2,11 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 class Enrollment2024_25(BaseModel):
+    """
+    Statement of Cash Flows for the fiscal year 2024 or 2023–2024.
+    Only extract data from the 2023–2024 fiscal period (e.g. statements labeled ‘Fiscal Year 2024’ or date ranges covering 2023–2024).
+    Ignore any figures outside this period.
+    """
     Undergraduate_Headcount: Optional[int] = Field(
         description=(
             "Total undergraduate headcount for the 2024–2025 academic year "
@@ -45,6 +50,7 @@ class Enrollment2024_25(BaseModel):
             "Post baccalaureate is considered a graduate headcount."
             "(Different than graduate FTE. Sometimes you need to combine both full-time and part time), "
             "Combine enrollment across all graduate schools (e.g. Business, Education, etc.), "
+            "if the graduate headcount included both professional and graduate headcount, it's fine to just put them under graduate headcount."
             "Combine online and in-person if applicable."
             "which may be labeled “GR”, “Grad”, or “Graduate”. "
             "Only extract data for the 2024–2025 year or terms labeled Fall 2024, etc"
@@ -302,6 +308,100 @@ class Enrollment2024_25(BaseModel):
         )
     )
 
+    
+
+class StatementOfCashFlows2024(BaseModel):
+    """
+    Statement of Cash Flows for the fiscal year 2024 or 2023–2024.
+    Only extract data from the 2023–2024 fiscal period (e.g. statements labeled ‘Fiscal Year 2024’ or date ranges covering 2023–2024).
+    Ignore any figures outside this period.
+    Values must be captured as dollar amounts (e.g., 1,234.56 means US$1,234.56), not in thousands or other units.
+    Do not derive or calculate values unless they appear explicitly in the document.
+    """
+    total_change_in_net_assets: Optional[float] = Field(
+        description=(
+            "Cash amount labeled 'Total Change in Net Assets' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Only extract the exact figure for that period."
+        )
+    )
+    total_non_cash_exp: Optional[float] = Field(
+        description=(
+            "Aggregate non-cash expenses (e.g., depreciation, amortization) labeled 'Total Non-Cash Exp' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Only extract from that statement."
+        )
+    )
+    change_in_working_capital: Optional[float] = Field(
+        description=(
+            "Line item 'Change in Working Capital' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Extract only the value for that period."
+        )
+    )
+    other_changes_in_operating_activities: Optional[float] = Field(
+        description=(
+            "Figure labeled 'Other Changes in Operating Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Ignore any amounts outside that period."
+        )
+    )
+    net_cash_from_operating_activities: Optional[float] = Field(
+        description=(
+            "Net cash from operating activities labeled 'Net Cash from Operating Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Only use the figure for that period."
+        )
+    )
+    capital_expenses: Optional[float] = Field(
+        description=(
+            "Cash outflow for capital expenditures labeled 'Capital Expenses' in the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Extract the exact amount for that period."
+        )
+    )
+    other_changes_in_investment_activities: Optional[float] = Field(
+        description=(
+            "Line item 'Other Changes in Investment Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Ignore entries outside that period."
+        )
+    )
+    net_cash_from_investment_activities: Optional[float] = Field(
+        description=(
+            "Net cash from investing activities labeled 'Net Cash from Investment Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Use only the figure for that period."
+        )
+    )
+    long_term_debt_net_proceeds: Optional[float] = Field(
+        description=(
+            "Proceeds from long-term debt issuance labeled 'Long-Term Debt Net Proceeds' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Extract only that period's value."
+        )
+    )
+    long_term_debt_principal_payments: Optional[float] = Field(
+        description=(
+            "Repayments of long-term debt principal labeled 'Long-Term Debt Principal Payments' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Ignore payments from other periods."
+        )
+    )
+    change_in_long_term_debt: Optional[float] = Field(
+        description=(
+            "Net change labeled 'Change in Long-Term Debt' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Only extract the figure for that period."
+        )
+    )
+    other_changes_in_financing_activities: Optional[float] = Field(
+        description=(
+            "Figure labeled 'Other Changes in Financing Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Only use that period's entry."
+        )
+    )
+    net_cash_from_financing_activities: Optional[float] = Field(
+        description=(
+            "Net cash from financing activities labeled 'Net Cash from Financing Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Extract exclusively that period's figure."
+        )
+    )
+    change_in_cash_and_equivalents: Optional[float] = Field(
+        description=(
+            "Overall 'Change in Cash & Equivalents' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Ignore any data from other periods."
+        )
+    )
 
 
 class FinancialPosition_2024_25(BaseModel):
