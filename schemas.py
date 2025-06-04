@@ -312,294 +312,97 @@ class Enrollment2024_25(BaseModel):
 
 class StatementOfCashFlows2024(BaseModel):
     """
-    Statement of Cash Flows for the fiscal year 2024 or 2023–2024.
-    Only extract data from the 2023–2024 fiscal period (e.g. statements labeled ‘Fiscal Year 2024’ or date ranges covering 2023–2024).
-    Ignore any figures outside this period.
-    Values must be captured as dollar amounts (e.g., 1,234.56 means US$1,234.56), not in thousands or other units.
+    Statement of Cash Flows for the fiscal year 2024.
+    Only extract data from the 2024 fiscal period (e.g. statements labeled ‘Fiscal Year 2024').
+    Ignore any figures outside this period. Do not extract anything from 2023.
+    Do not extract anything from the condensed or summary table or statement. Only from the Long, fullly elborated statement or table.
     Do not derive or calculate values unless they appear explicitly in the document.
+    Extract the number as it is. Don't convert its unit.
     """
     total_change_in_net_assets: Optional[float] = Field(
         description=(
-            "Cash amount labeled 'Total Change in Net Assets' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Cash amount labeled 'Total Change in Net Assets' for the 2024 fiscal year, in US dollars. "
             "Only extract the exact figure for that period."
         )
     )
     total_non_cash_exp: Optional[float] = Field(
         description=(
-            "Aggregate non-cash expenses (e.g., depreciation, amortization) labeled 'Total Non-Cash Exp' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Aggregate non-cash expenses (e.g., depreciation, amortization) labeled 'Total Non-Cash Exp' for the 2024 fiscal year, in US dollars. "
             "Only extract from that statement."
         )
     )
     change_in_working_capital: Optional[float] = Field(
         description=(
-            "Line item 'Change in Working Capital' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Line item 'Change in Working Capital' for the 2024 fiscal year, in US dollars. "
             "Extract only the value for that period."
         )
     )
     other_changes_in_operating_activities: Optional[float] = Field(
         description=(
-            "Figure labeled 'Other Changes in Operating Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Figure labeled 'Other Changes in Operating Activities' for the 2024 fiscal year, in US dollars. "
             "Ignore any amounts outside that period."
         )
     )
     net_cash_from_operating_activities: Optional[float] = Field(
         description=(
-            "Net cash from operating activities labeled 'Net Cash from Operating Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Net cash from operating activities labeled 'Net Cash from Operating Activities' for the 2024 fiscal year, in US dollars. "
             "Only use the figure for that period."
         )
     )
     capital_expenses: Optional[float] = Field(
         description=(
-            "Cash outflow for capital expenditures labeled 'Capital Expenses' in the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Cash outflow for capital expenditures labeled 'Capital Expenses' in the 2024 fiscal year, in US dollars. "
             "Extract the exact amount for that period."
         )
     )
     other_changes_in_investment_activities: Optional[float] = Field(
         description=(
-            "Line item 'Other Changes in Investment Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Line item 'Other Changes in Investment Activities' for the 2024 fiscal year, in US dollars. "
             "Ignore entries outside that period."
         )
     )
     net_cash_from_investment_activities: Optional[float] = Field(
         description=(
-            "Net cash from investing activities labeled 'Net Cash from Investment Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Net cash from investing activities labeled 'Net Cash from Investment Activities' for the 2024 fiscal year, in US dollars. "
             "Use only the figure for that period."
         )
     )
     long_term_debt_net_proceeds: Optional[float] = Field(
         description=(
-            "Proceeds from long-term debt issuance labeled 'Long-Term Debt Net Proceeds' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Proceeds from long-term debt issuance labeled 'Long-Term Debt Net Proceeds' for the 2024 fiscal year, in US dollars. "
             "Extract only that period's value."
         )
     )
     long_term_debt_principal_payments: Optional[float] = Field(
         description=(
-            "Repayments of long-term debt principal labeled 'Long-Term Debt Principal Payments' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Repayments of long-term debt principal labeled 'Long-Term Debt Principal Payments' for the 2024 fiscal year, in US dollars. "
             "Ignore payments from other periods."
         )
     )
     change_in_long_term_debt: Optional[float] = Field(
         description=(
-            "Net change labeled 'Change in Long-Term Debt' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Net change labeled 'Change in Long-Term Debt' for the 2024 fiscal year, in US dollars. "
             "Only extract the figure for that period."
         )
     )
     other_changes_in_financing_activities: Optional[float] = Field(
         description=(
-            "Figure labeled 'Other Changes in Financing Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Figure labeled 'Other Changes in Financing Activities' for the 2024 fiscal year, in US dollars. "
             "Only use that period's entry."
         )
     )
     net_cash_from_financing_activities: Optional[float] = Field(
         description=(
-            "Net cash from financing activities labeled 'Net Cash from Financing Activities' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Net cash from financing activities labeled 'Net Cash from Financing Activities' for the 2024 fiscal year, in US dollars. "
+            "Combine all financing activities, ex: combine Cash Flows from Net cash used for capital and related financing activities and Net cash provided by noncapital financing activities. Ex: there are two financing fields for the Arizona State University"
             "Extract exclusively that period's figure."
         )
     )
     change_in_cash_and_equivalents: Optional[float] = Field(
         description=(
-            "Overall 'Change in Cash & Equivalents' for the 2024 or 2023–2024 fiscal year, in US dollars. "
+            "Overall 'Change in Cash & Equivalents' for the 2024 fiscal year, in US dollars. "
             "Ignore any data from other periods."
         )
     )
 
 
-class FinancialPosition_2024_25(BaseModel):
-    year: int = Field(
-        description=(
-            "Fiscal year for which the data applies (e.g., 2024–2025). "
-            "Only extract data for the 2024–2025 fiscal year; ignore data from other years or periods."
-        )
-    )
-    cash_and_short_term_investments: Optional[int] = Field(
-        description=(
-            "Unrestricted cash, cash equivalents, and short‑term investments as of the end of the 2024–2025 fiscal year. "
-            "Only extract 2024–2025 data; exclude restricted cash reported separately and any other periods. "
-            "If the institution reports multiple segments or campuses, combine all."
-        )
-    )
-    student_receivables_net: Optional[int] = Field(
-        description=(
-            "Net student receivables for the 2024–2025 fiscal year (after allowance for doubtful accounts). "
-            "Only extract net figures; ignore gross receivables or allowances reported separately. "
-            "Combine across campuses if applicable."
-        )
-    )
-    accounts_receivable: Optional[int] = Field(
-        description=(
-            "Total accounts receivable as of the end of the 2024–2025 fiscal year. "
-            "Only extract data for 2024–2025; exclude intercompany balances if reported separately. "
-            "Combine across all reporting units."
-        )
-    )
-    contributions_receivable: Optional[int] = Field(
-        description=(
-            "Pledges and contributions receivable for the 2024–2025 fiscal year. "
-            "Only extract receivable amounts net of allowance; ignore contributions from other periods. "
-            "Combine across campuses or programs."
-        )
-    )
-    notes_receivable: Optional[int] = Field(
-        description=(
-            "Notes receivable outstanding as of the end of the 2024–2025 fiscal year. "
-            "Only extract 2024–2025 amounts; combine across all segments if reported separately."
-        )
-    )
-    loans_receivable_net: Optional[int] = Field(
-        description=(
-            "Net loans receivable (after allowance) for the 2024–2025 fiscal year. "
-            "Only extract net figures; ignore loan loss reserves or gross balances. "
-            "Combine across campuses if applicable."
-        )
-    )
-    other_assets: Optional[int] = Field(
-        description=(
-            "Other assets not classified elsewhere for the 2024–2025 fiscal year. "
-            "Only extract 2024–2025 data; review footnotes to avoid overlap with other categories."
-        )
-    )
-    investments: Optional[int] = Field(
-        description=(
-            "Short‑ and long‑term investments as of the end of the 2024–2025 fiscal year. "
-            "Only extract fair‑value amounts; exclude restricted or endowment investments if reported separately."
-        )
-    )
-    right_of_use_assets: Optional[int] = Field(
-        description=(
-            "Total right‑of‑use assets recognized under ASC 842 for the 2024–2025 fiscal year. "
-            "Only extract lease assets; ignore associated lease liabilities."
-        )
-    )
-    land_buildings_equipment_net: Optional[int] = Field(
-        description=(
-            "Property, plant, and equipment, net of accumulated depreciation, as of the end of the 2024–2025 fiscal year. "
-            "Only extract net PP&E; accumulated depreciation is reported separately. "
-            "Combine across all locations if the institution has multiple campuses."
-        )
-    )
-    accumulated_depreciation: Optional[int] = Field(
-        description=(
-            "Total accumulated depreciation (contra‑asset) as of the end of the 2024–2025 fiscal year. "
-            "Only extract depreciation related to PP&E; confirm sign convention."
-        )
-    )
-    rou_assets_finance_lease: Optional[int] = Field(
-        description=(
-            "Right‑of‑use assets under finance leases for the 2024–2025 fiscal year. "
-            "Only extract finance‑lease assets; exclude operating leases."
-        )
-    )
-    rou_assets_operating_lease: Optional[int] = Field(
-        description=(
-            "Right‑of‑use assets under operating leases for the 2024–2025 fiscal year. "
-            "Only extract operating‑lease assets; exclude finance leases."
-        )
-    )
-    current_portion_long_term_debt: Optional[int] = Field(
-        description=(
-            "Portion of long‑term debt due within one year as of the 2024–2025 fiscal year end. "
-            "Only extract current maturities; ignore total long‑term debt lines."
-        )
-    )
-    current_portion_operating_lease: Optional[int] = Field(
-        description=(
-            "Current portion of lease liabilities under operating leases for the 2024–2025 fiscal year. "
-            "Only extract amounts due within one year; the long‑term portion is reported separately."
-        )
-    )
-    short_term_debt: Optional[int] = Field(
-        description=(
-            "Short‑term borrowings (e.g., commercial paper) as of the 2024–2025 fiscal year end. "
-            "Only extract amounts maturing within one year; ignore long‑term borrowings."
-        )
-    )
-    total_assets: Optional[int] = Field(
-        description=(
-            "Total assets for the 2024–2025 fiscal year. "
-            "Only extract if explicitly provided; otherwise sum all individual asset line items."
-        )
-    )
-    accounts_payable: Optional[int] = Field(
-        description=(
-            "Trade and other payables as of the end of the 2024–2025 fiscal year. "
-            "Only extract accounts payable; exclude accrued expenses."
-        )
-    )
-    student_deposits_and_deferred_revenue: Optional[int] = Field(
-        description=(
-            "Student deposits and deferred revenue balances for the 2024–2025 fiscal year. "
-            "Only extract deferred tuition/fees; ignore deposits from other sources."
-        )
-    )
-    tenant_capital_improvements: Optional[int] = Field(
-        description=(
-            "Liabilities for tenant capital improvements as of the 2024–2025 fiscal year end. "
-            "Only extract capital improvement obligations; confirm classification via footnotes."
-        )
-    )
-    bonds_payable_net: Optional[int] = Field(
-        description=(
-            "Bonds payable, net of unamortized discount/premium, as of the 2024–2025 fiscal year end. "
-            "Only extract net bond amounts; ignore gross issue amounts."
-        )
-    )
-    refundable_advances_us_govt: Optional[int] = Field(
-        description=(
-            "Refundable government advances (e.g., Pell grants) for the 2024–2025 fiscal year. "
-            "Only extract refundable advance balances; exclude nonrefundable grants."
-        )
-    )
-    lease_obligations: Optional[int] = Field(
-        description=(
-            "Total lease liabilities recognized under ASC 842 for the 2024–2025 fiscal year. "
-            "Only extract combined current and non‑current lease obligations."
-        )
-    )
-    liabilities_under_split_interest_agreements: Optional[int] = Field(
-        description=(
-            "Liabilities under split‑interest agreements for the 2024–2025 fiscal year. "
-            "Only extract these obligations; consult footnotes for detail."
-        )
-    )
-    liabilities_associated_with_investments: Optional[int] = Field(
-        description=(
-            "Investment‑related liabilities (e.g., margin loans) for the 2024–2025 fiscal year. "
-            "Only extract liabilities tied to investment activities; ignore other financing liabilities."
-        )
-    )
-    non_controlling_interests: Optional[int] = Field(
-        description=(
-            "Non‑controlling (minority) interests in consolidated subsidiaries as of the 2024–2025 fiscal year end. "
-            "Only extract equity attributable to minority shareholders."
-        )
-    )
-    total_liabilities: Optional[int] = Field(
-        description=(
-            "Total liabilities for the 2024–2025 fiscal year. "
-            "Only extract if provided; otherwise sum all individual liability line items."
-        )
-    )
-    net_assets_with_donor_restrictions: Optional[int] = Field(
-        description=(
-            "Net assets subject to donor restrictions as of the 2024–2025 fiscal year end. "
-            "Only extract donor‑restricted amounts; exclude board‑designated funds."
-        )
-    )
-    net_assets_without_donor_restrictions: Optional[int] = Field(
-        description=(
-            "Net assets without donor restrictions for the 2024–2025 fiscal year. "
-            "Only extract unrestricted net assets; ignore temporarily restricted categories."
-        )
-    )
-    total_net_assets: Optional[int] = Field(
-        description=(
-            "Total net assets (with and without donor restrictions) for the 2024–2025 fiscal year. "
-            "Only extract if provided; otherwise sum net asset lines."
-        )
-    )
-    total_liabilities_and_net_assets: Optional[int] = Field(
-        description=(
-            "Total liabilities and net assets (should equal total assets) for the 2024–2025 fiscal year. "
-            "Only extract provided totals; verify the balance sheet equation holds."
-        )
-    )
