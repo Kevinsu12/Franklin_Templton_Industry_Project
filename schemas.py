@@ -394,7 +394,7 @@ class StatementOfCashFlows2024(BaseModel):
     net_cash_from_financing_activities: Optional[float] = Field(
         description=(
             "Net cash from financing activities labeled 'Net Cash from Financing Activities' for the 2024 fiscal year, in US dollars. "
-            "Combine all financing activities, ex: combine Cash Flows from Net cash used for capital and related financing activities and Net cash provided by noncapital financing activities. Ex: there are two financing fields for the Arizona State University"
+            "Combine all financing activities cashflow, ex: combine Cash Flows from Net cash used for capital and related financing activities and Net cash provided by noncapital financing activities. Sometimes threre are two cateogries for financing activities, you want to combine them"
             "Extract exclusively that period's figure."
         )
     )
