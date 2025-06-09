@@ -31,7 +31,7 @@ class EndowmentAndInvestmentLevels_2024_25(BaseModel):
     endowment_net_assets_eoy_with_donor_restrictions_permanently_restricted: Optional[int] = Field(
         description=(
             "Permanently restricted portion of donor-restricted endowment net assets for FY2024 (in thousands). "
-            "Only extract from Notes where clearly labeled as 2024. Exclude all values from 2023 or earlier."
+            "Only extract from Notes where clearly labeled as 2024."
         )
     )
 
@@ -48,7 +48,7 @@ class EndowmentAndInvestmentLevels_2024_25(BaseModel):
         description=(
             "Total appropriations or spending from the endowment during 2024–2025 (in thousands). "
             "Only extract from the 'Changes in Endowment Net Assets' table in the Notes section. "
-            "Do not infer from general text or extract from unlabeled rows. Exclude 2023."
+            "Do not infer from general text or extract from unlabeled rows."
         )
     )
 
@@ -72,7 +72,7 @@ class EndowmentAndInvestmentLevels_2024_25(BaseModel):
             "Fair value of Level 1 investments (quoted market prices) at June 30, 2024 (in thousands). "
             "Only extract from a fair value hierarchy table in the Notes section. "
             "Ensure the table is for the university, not an enterprise or foundation. "
-            "Do not use any values from 2023 or earlier."
+            
         )
     )
 
@@ -87,7 +87,7 @@ class EndowmentAndInvestmentLevels_2024_25(BaseModel):
     investment_level_3: Optional[int] = Field(
         description=(
             "Fair value of Level 3 investments (unobservable inputs) at year-end 2024 (in thousands). "
-            "Only extract from 2024-labeled fair value tables in the Notes. Ignore 2023 rows or mixed-year summaries."
+            "Only extract from 2024-labeled fair value tables in the Notes. Ignore mixed-year summaries."
         )
     )
 
