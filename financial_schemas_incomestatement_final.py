@@ -237,6 +237,7 @@ def generate_income_statement_schema(fiscal_year: int):
                         "Only extract if explicitly stated. Do not derive."
         )
 
+        #---Deterministic fields that are computed after all other fields are set
         @model_validator(mode="after")
         def compute_other_fields(self):
             def compute_other(total_field, *component_fields):
